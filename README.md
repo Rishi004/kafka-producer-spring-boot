@@ -34,6 +34,7 @@
  ./bin/windows/kafka-console.producer.bat --broker-list localhost:9092 --topic first-topic </path/to/file.csv
  
 --> start consumer console
+
  ./bin/windows/kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic first-topic --from-beginning
 
 
