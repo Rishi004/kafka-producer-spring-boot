@@ -11,20 +11,24 @@ import com.example.kafka.service.KafkaMessagePublisher;
 
 @RestController
 public class KafkaEventController {
-	
+
+	private final KafkaMessagePublisher kafkaMessagePublisher;
+
 	@Autowired
-	private KafkaMessagePublisher kafkaMessagePublisher;
-	
+	public KafkaEventController(KafkaMessagePublisher kafkaMessagePublisher) {
+		this.kafkaMessagePublisher = kafkaMessagePublisher;
+	}
+
 	@GetMapping("/publish/{message}")
-	public ResponseEntity<?> publishMessage (@PathVariable String message) {
+	public ResponseEntity<?> publishMessage(@PathVariable String message) {
 		try {
-			for (int i = 0; i <= 10000; i++) {
+			for (int i = 0; i <= 20000; i++) {
 				kafkaMessagePublisher.sendMessageToTopic(message + " : " + i);
 			}
 			return ResponseEntity.ok("message published successfully...");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		
+
 	}
 }

@@ -12,14 +12,18 @@ import com.example.kafka.utils.TopicNames;
 @Service
 public class KafkaMessagePublisher {
 
+	private final TopicNames topicNames;
+	
 	@Autowired
 	private KafkaTemplate<String, Object> kafkaTemplate;
 
 	@Autowired
-	private TopicNames topicNames;
+	public KafkaMessagePublisher(TopicNames topicNames) {
+		this.topicNames = topicNames;
+	}
 
 	public void sendMessageToTopic(String message) {
-		CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send(topicNames.getTestTopic2(), message);
+		CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send(topicNames.getTestTopic3(), message);
 		future.whenComplete((result, ex) -> {
 			if (ex == null)
 				System.out.println(
