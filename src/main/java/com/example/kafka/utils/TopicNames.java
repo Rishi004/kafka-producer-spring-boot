@@ -19,4 +19,7 @@ public class TopicNames {
 	
 	@Value("${test.topic.three}")
 	private String testTopic3;
+	
+	@Value("${test.topic.four}")
+	private String testTopic4;
 }
